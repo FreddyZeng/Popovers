@@ -63,6 +63,9 @@ public extension Templates {
                     .background(
                         BackgroundWithArrow(
                             arrowSide: arrowSide ?? context.attributes.position.getArrowPosition(),
+                            sourceFrame: context.attributes.sourceFrame(),
+                            staticFrame: context.staticFrame,
+                            screenEdgePadding: context.attributes.screenEdgePadding,
                             cornerRadius: cornerRadius
                         )
                         .fill(backgroundColor)

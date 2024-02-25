@@ -18,6 +18,12 @@ public extension Templates {
     struct BackgroundWithArrow: Shape {
         /// The side of the rectangle to have the arrow
         public var arrowSide: ArrowSide
+        
+        public var sourceFrame: CGRect
+        
+        public var staticFrame: CGRect
+        
+        public var screenEdgePadding: UIEdgeInsets
 
         /// The shape's corner radius
         public var cornerRadius: CGFloat
@@ -125,7 +131,24 @@ public extension Templates {
                     .init(translationX: popoverRadius, y: 0)
                 )
             }
-
+            
+            let middlePoint = CGPoint(x: staticFrame.origin.x + staticFrame.size.width/2.0, y: staticFrame.origin.y + staticFrame.size.height/2.0)
+            
+            var x = sourceFrame.origin.x
+            
+            if x + Templates.BackgroundWithArrow.width/2.0 + screenEdgePadding.right > staticFrame.origin.x + staticFrame.size.width {
+                x = staticFrame.origin.x + staticFrame.size.width - Templates.BackgroundWithArrow.width/2.0
+            } else if x - Templates.BackgroundWithArrow.width/2.0 - screenEdgePadding.left < staticFrame.origin.x {
+                x = staticFrame.origin.x + Templates.BackgroundWithArrow.width/2.0
+            }
+            
+            if case .bottom = arrowSide {
+                arrowPath = arrowPath.applying(.init(translationX: middlePoint.x - x, y: 0))
+            } else if case .top = arrowSide {
+                arrowPath = arrowPath.applying(.init(translationX: -(middlePoint.x - x), y: 0))
+            }
+            
+            
             path.addPath(arrowPath, transform: arrowTransform)
 
             return path
