@@ -119,8 +119,8 @@ class PopoverModel: ObservableObject {
 
     /// Access this with `UIResponder.frameTagged(_:)` if inside a `WindowReader`, or `Popover.Context.frameTagged(_:)` if inside a `PopoverReader.`
     func frame(tagged tag: AnyHashable) -> CGRect {
-        let frame = frameTags[tag]
-        return frame ?? .zero
+        let supperContainerFrame = frameTags[tag]
+        return supperContainerFrame ?? .zero
     }
 }
 #endif

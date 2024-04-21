@@ -32,14 +32,14 @@ public extension View {
     func frameReader(in coordinateSpace: CoordinateSpace = .global, rect: @escaping (CGRect) -> Void) -> some View {
         return background(
             GeometryReader { geometry in
-                let frame = geometry.frame(in: coordinateSpace)
+                let supperContainerFrame = geometry.frame(in: coordinateSpace)
 
                 Color.clear
-                    .onValueChange(of: frame) { _, newValue in
+                    .onValueChange(of: supperContainerFrame) { _, newValue in
                         rect(newValue)
                     }
                     .onAppear {
-                        rect(frame)
+                        rect(supperContainerFrame)
                     }
             }
             .hidden()

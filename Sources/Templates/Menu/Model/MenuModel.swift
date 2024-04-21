@@ -53,8 +53,8 @@ extension Templates {
                 print("[Popovers] Multiple menu items have the same frame. Make sure items don't overlay. If you can't resolve this, please file a bug report (https://github.com/aheze/Popovers/issues).")
             }
 
-            if let frame = matchingFrames.first {
-                return frame.key
+            if let supperContainerFrame = matchingFrames.first {
+                return supperContainerFrame.key
             }
 
             return nil

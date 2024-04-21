@@ -28,7 +28,7 @@ public extension Popover {
         @Published public var staticFrame = CGRect.zero
         
         /// The current frame of the popover.
-        @Published public var frame = CGRect.zero
+        @Published public var supperContainerFrame = CGRect.zero
         
         /// The currently selected anchor, if the popover has a `.relative` position.
         @Published public var selectedAnchor: Popover.Attributes.Position.Anchor?

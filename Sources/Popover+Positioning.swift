@@ -250,8 +250,8 @@ public extension Popover.Attributes.Position {
             popoverSize: popoverSize
         )
 
-        let frame = CGRect(origin: origin, size: popoverSize)
-        return frame
+        let supperContainerFrame = CGRect(origin: origin, size: popoverSize)
+        return supperContainerFrame
     }
 }
 

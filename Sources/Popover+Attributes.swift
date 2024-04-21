@@ -166,14 +166,14 @@ extension Popover {
         /// The popover's presentation animation and transition.
         public struct Presentation {
             /// The animation timing used when the popover is presented.
-            public var animation: Animation? = .easeOut
+            public var animation: Animation? = .easeOut(duration: 0.15)
             
             /// The transition used when the popover is presented.
             public var transition: AnyTransition? = .opacity
             
             /// Create the default animation and transition for the popover.
             public init(
-                animation: Animation? = .easeOut,
+                animation: Animation? = .easeOut(duration: 0.15),
                 transition: AnyTransition? = .opacity
             ) {
                 self.animation = animation
@@ -184,7 +184,7 @@ extension Popover {
         /// The popover's dismissal animation, transition, and other behavior.
         public struct Dismissal {
             /// The animation timing used when the popover is dismissed.
-            public var animation: Animation? = .easeOut
+            public var animation: Animation? = .easeOut(duration: 0.15)
             
             /// The transition used when the popover is dismissed.
             public var transition: AnyTransition? = .opacity
@@ -224,7 +224,7 @@ extension Popover {
             
             /// Create the default dismissal behavior for the popover.
             public init(
-                animation: Animation? = .easeOut,
+                animation: Animation? = .easeOut(duration: 0.15),
                 transition: AnyTransition? = .opacity,
                 mode: Popover.Attributes.Dismissal.Mode = Mode.tapOutside,
                 tapOutsideIncludesOtherPopovers: Bool = false,

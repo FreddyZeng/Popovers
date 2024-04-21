@@ -19,21 +19,21 @@ import SwiftUI
 struct FrameTagModifier: ViewModifier {
     /// The name of the frame.
     let tag: AnyHashable
-    @State var frame = CGRect.zero
+    @State var supperContainerFrame = CGRect.zero
 
     func body(content: Content) -> some View {
         WindowReader { window in
             content
-                .frameReader { frame in
-                    self.frame = frame
+                .frameReader { supperContainerFrame in
+                    self.supperContainerFrame = supperContainerFrame
 
                     if let window = window {
-                        window.save(frame, for: tag)
+                        window.save(supperContainerFrame, for: tag)
                     }
                 }
                 .onValueChange(of: window) { _, newValue in
                     if let window = window {
-                        window.save(frame, for: tag)
+                        window.save(supperContainerFrame, for: tag)
                     }
                 }
         }
@@ -72,8 +72,8 @@ public extension UIResponder {
     }
 
     /// Save a frame in this window's `frameTags`.
-    internal func save(_ frame: CGRect, for tag: AnyHashable) {
-        popoverModel.frameTags[tag] = frame
+    internal func save(_ supperContainerFrame: CGRect, for tag: AnyHashable) {
+        popoverModel.frameTags[tag] = supperContainerFrame
     }
 }
 

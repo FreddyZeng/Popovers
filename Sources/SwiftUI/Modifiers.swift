@@ -66,8 +66,8 @@ struct PopoverModifier: ViewModifier {
             content
 
                 /// Read the frame of the source view.
-                .frameReader { frame in
-                    sourceFrame = frame
+                .frameReader { supperContainerFrame in
+                    sourceFrame = supperContainerFrame
                 }
 
                 /// Detect a state change in `$present`.
@@ -207,10 +207,10 @@ struct MultiPopoverModifier: ViewModifier {
             content
 
                 /// Read the frame of the source view.
-                .frameReader { frame in
+                .frameReader { supperContainerFrame in
 
                     /// Save the frame for now, until the selection changes (by that time, the window scene should be ready).
-                    sourceFrame = frame
+                    sourceFrame = supperContainerFrame
                 }
 
                 /// `$selection` was changed, determine if the popover should be presented, animated, or dismissed.

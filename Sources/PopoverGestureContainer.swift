@@ -76,18 +76,18 @@ class PopoverGestureContainer: UIView {
         let popovers = popoverModel.popovers
 
         /// The current popovers' frames
-        let popoverFrames = popovers.map { $0.context.frame }
+        let popoverFrames = popovers.map { $0.context.supperContainerFrame }
 
         /// Loop through the popovers and see if the touch hit it.
         /// `reversed` to start from the most recently presented popovers, working backwards.
         for popover in popovers.reversed() {
             /// Check it the popover was hit.
-            if popover.context.frame.contains(point) {
+            if popover.context.supperContainerFrame.contains(point) {
                 /// Dismiss other popovers if they have `tapOutsideIncludesOtherPopovers` set to true.
                 for popoverToDismiss in popovers {
                     if
                         popoverToDismiss != popover,
-                        !popoverToDismiss.context.frame.contains(point) /// The popover's frame doesn't contain the touch point.
+                        !popoverToDismiss.context.supperContainerFrame.contains(point) /// The popover's frame doesn't contain the touch point.
                     {
                         dismissPopoverIfNecessary(popoverFrames: popoverFrames, point: point, popoverToDismiss: popoverToDismiss)
                     }

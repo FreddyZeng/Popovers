@@ -97,7 +97,7 @@ struct PopoverContainerView: View {
                                     applyDraggingOffset(popover: popover, translation: value.translation)
 
                                     /// Update the visual frame to account for the dragging offset.
-                                    popover.context.frame = CGRect(
+                                    popover.context.supperContainerFrame = CGRect(
                                         origin: popover.context.staticFrame.origin + CGPoint(
                                             x: selectedPopoverOffset.width,
                                             y: selectedPopoverOffset.height
@@ -132,7 +132,7 @@ struct PopoverContainerView: View {
 
                                     /// Let the popover know that it finished dragging.
                                     popover.positionChanged(to: finalOrigin)
-                                    popover.context.frame = popover.context.staticFrame
+                                    popover.context.supperContainerFrame = popover.context.staticFrame
                                 }
 
                                 /// Unselect the popover.
@@ -185,10 +185,10 @@ struct PopoverContainerView: View {
     /// Get the offset of a popover in order to place it in its correct location.
     func popoverOffset(for popover: Popover) -> CGSize {
         guard popover.context.size != nil else { return .zero }
-        let frame = popover.context.staticFrame
+        let supperContainerFrame = popover.context.staticFrame
         let offset = CGSize(
-            width: frame.origin.x + ((selectedPopover == popover) ? selectedPopoverOffset.width : 0),
-            height: frame.origin.y + ((selectedPopover == popover) ? selectedPopoverOffset.height : 0)
+            width: supperContainerFrame.origin.x + ((selectedPopover == popover) ? selectedPopoverOffset.width : 0),
+            height: supperContainerFrame.origin.y + ((selectedPopover == popover) ? selectedPopoverOffset.height : 0)
         )
 
         return offset

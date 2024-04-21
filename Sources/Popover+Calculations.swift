@@ -12,10 +12,10 @@ import SwiftUI
 public extension Popover {
     /// Updates the popover's frame using its size.
     func updateFrame(with size: CGSize?) {
-        let frame = calculateFrame(from: size)
+        let supperContainerFrame = calculateFrame(from: size)
         context.size = size
-        context.staticFrame = frame
-        context.frame = frame
+        context.staticFrame = supperContainerFrame
+        context.supperContainerFrame = supperContainerFrame
     }
 
     /// Calculate the popover's frame based on its size and position.
@@ -85,7 +85,7 @@ public extension Popover {
                 var newFrame = context.staticFrame
                 newFrame.origin.y = windowBounds.height
                 context.staticFrame = newFrame
-                context.frame = newFrame
+                context.supperContainerFrame = newFrame
             }
             dismiss()
             return
@@ -98,31 +98,31 @@ public extension Popover {
                 var newFrame = context.staticFrame
                 newFrame.origin.y = -newFrame.height
                 context.staticFrame = newFrame
-                context.frame = newFrame
+                context.supperContainerFrame = newFrame
             }
             dismiss()
             return
         }
 
         if case let .relative(popoverAnchors) = attributes.position {
-            let frame = attributes.sourceFrame().inset(by: attributes.sourceFrameInset)
+            let supperContainerFrame = attributes.sourceFrame().inset(by: attributes.sourceFrameInset)
             let size = context.size ?? .zero
 
             let closestAnchor = attributes.position.relativeClosestAnchor(
                 popoverAnchors: popoverAnchors,
-                containerFrame: frame,
+                containerFrame: supperContainerFrame,
                 popoverSize: size,
                 targetPoint: point
             )
             let popoverFrame = attributes.position.relativeFrame(
                 selectedAnchor: closestAnchor,
-                containerFrame: frame,
+                containerFrame: supperContainerFrame,
                 popoverSize: size
             )
 
             context.selectedAnchor = closestAnchor
             context.staticFrame = popoverFrame
-            context.frame = popoverFrame
+            context.supperContainerFrame = popoverFrame
         }
     }
 }

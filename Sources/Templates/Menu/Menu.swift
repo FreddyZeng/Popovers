@@ -145,7 +145,7 @@ public extension Templates {
                             model.frames = [:]
                         }
                         context.attributes.onContextChange = { context in
-                            model.menuFrame = context.frame
+                            model.menuFrame = context.supperContainerFrame
                         }
                     }
                     .onChange(of: model.hoveringItemID) { newValue in
@@ -180,7 +180,7 @@ public extension Templates {
             label(model.hoveringItemID == itemID)
 
                 /// Read the frame of the menu item.
-                .frameReader { frame in
+                .frameReader { supperContainerFrame in
 
                     /// Don't set frames when dismissing.
                     guard model.present else { return }
@@ -190,14 +190,14 @@ public extension Templates {
                      I need to investigate this. This is possibly the result of a bug in the `@State var itemID`,
                      For now, check if there's similar frames and remove them.
                      */
-                    let overlappingFrames = model.frames.filter { $0.value.insetBy(dx: 3, dy: 3).intersects(frame) }
+                    let overlappingFrames = model.frames.filter { $0.value.insetBy(dx: 3, dy: 3).intersects(supperContainerFrame) }
 
                     for overlappingFrame in overlappingFrames {
                         if overlappingFrame.key != itemID {
                             model.frames[overlappingFrame.key] = nil
                         }
                     }
-                    model.frames[itemID] = frame
+                    model.frames[itemID] = supperContainerFrame
                 }
                 .onValueChange(of: model.selectedItemID) { _, newValue in
                     if newValue == itemID {
@@ -328,7 +328,7 @@ public extension Templates {
                         Color.clear
                             .overlay(
                                 RoundedRectangle(cornerRadius: configuration.cornerRadius)
-                                    .frame(height: expanded ? nil : context.frame.height / 3),
+                                    .frame(height: expanded ? nil : context.supperContainerFrame.height / 3),
                                 alignment: configuration.clipAlignment
                             )
                     )
@@ -338,7 +338,7 @@ public extension Templates {
                         Templates.VisualEffectView(configuration.menuBlur)
                             .cornerRadius(configuration.cornerRadius)
                             .popoverShadow(shadow: configuration.shadow)
-                            .frame(height: expanded ? nil : context.frame.height / 3),
+                            .frame(height: expanded ? nil : context.supperContainerFrame.height / 3),
                         alignment: configuration.clipAlignment
                     )
             } else {
